@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="2022_07_06_01_01" author="max">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet id="2022_07_06_01_02" author="max">
+        <addColumn
+                tableName="users">
+            <column name="user_name"
+                    position="2"
+                    type="varchar(255)"/>
+            <column name="password"
+                    position="3"
+                    type="varchar(50)">
+                <constraints/>
+            </column>
+        </addColumn>
+
+    </changeSet>
+    <changeSet id="2022_07_06_01_03" author="max">
+        <createTable tableName="orgunit">
+            <column autoIncrement="true"
+                    name="id"
+                    type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name"
+                    type="varchar(255)">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2022_07_06_01_05" author="max">
+        <createTable tableName="employee">
+            <column autoIncrement="true"
+                    name="id"
+                    type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id"
+                    type="BIGINT">
+                <constraints
+                        referencedTableName="users"
+                        referencedColumnNames="id"
+                        foreignKeyName="employee_user_id_fk"
+                        nullable="false"/>
+            </column>
+            <column name="first_name"
+                    type="varchar(255)">
+            </column>
+            <column name="second_name"
+                    type="varchar(255)">
+            </column>
+            <column name="patronymic_name"
+                    type="varchar(255)">
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet id="2022_07_06_01_06" author="max">
+        <createTable tableName="position">
+            <column autoIncrement="true"
+                    name="id"
+                    type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name"
+                    type="varchar(255)">
+            </column>
+            <column name="org_unit_id"
+                    type="BIGINT">
+                <constraints
+                        referencedTableName="orgunit"
+                        referencedColumnNames="id"
+                        foreignKeyName="position_orgunit_id_fk"
+                        nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2022_07_06_01_07" author="max">
+        <createTable tableName="employee_position">
+            <column autoIncrement="true"
+                    name="id"
+                    type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="employee_id"
+                    type="BIGINT">
+                <constraints
+                        referencedTableName="employee"
+                        referencedColumnNames="id"
+                        foreignKeyName="employee_position_employee_id_fk"
+                        nullable="false"/>
+            </column>
+            <column name="position_id"
+                    type="BIGINT">
+                <constraints
+                        referencedTableName="position"
+                        referencedColumnNames="id"
+                        foreignKeyName="employee_position_position_id_fk"
+                        nullable="false"/>
+            </column>
+            <column name="start_date"
+                    type="date">
+            </column>
+            <column name="end_date"
+                    type="date">
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
+
