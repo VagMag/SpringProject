@@ -3,10 +3,7 @@ package com.example.demospring.controller;
 import com.example.demospring.entity.User;
 import com.example.demospring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,8 +15,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    private List<User> findAllUsers() {return userService.getAllUsers();}
+    public List<User> findAllUsers() {return userService.getAllUsers();}
 
     @GetMapping("/{id}")
-    private User findUser(@PathVariable("id") Long id) {return userService.getUser(id);}
+    public User findUser(@PathVariable("id") Long id) {return userService.getUser(id);}
+
+//    @PostMapping
+//    public void createUser(@RequestBody User user){
+//        userService.createUser(user);
+//    }
 }

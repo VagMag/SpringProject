@@ -1,5 +1,6 @@
 package com.example.demospring.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User extends AbstractEntity {
 
-    @JsonIgnore
+    @JsonBackReference
     @OneToOne(mappedBy = "user")
     private Employee employee;
 

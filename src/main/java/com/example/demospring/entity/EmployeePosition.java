@@ -1,5 +1,6 @@
 package com.example.demospring.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +20,10 @@ public class EmployeePosition extends AbstractEntity {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @JsonIgnore
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
     private Position position;
 
     private LocalDate startDate;
+    private LocalDate endDate;
 }

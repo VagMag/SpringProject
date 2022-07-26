@@ -1,5 +1,6 @@
 package com.example.demospring.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class Project extends AbstractEntity{
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "employee_project",
             joinColumns = {@JoinColumn(name = "project_id", nullable = false)},

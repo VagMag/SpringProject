@@ -1,6 +1,5 @@
 package com.example.demospring.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Table(name = "employee")
 public class Employee extends AbstractEntity {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     private User user;
 
@@ -28,7 +27,7 @@ public class Employee extends AbstractEntity {
     @Column(name = "patronymic_name")
     private String patronymicName;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_project",
             joinColumns = {@JoinColumn(name = "employee_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "project_id", nullable = false)}
